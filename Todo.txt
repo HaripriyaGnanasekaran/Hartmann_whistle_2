@@ -1,19 +1,22 @@
-
-
 Hi all, 
 
-I am planning to test the effectiveness of the opensource LCS codes taken from Daibiri webpage, 
-till we get the new version of the LCS from the Delft group.
+If you are interested in testing the LCS code from Daibiri group, you can use the code
+in the repository (or you can download from daibiri group's page). It is a opensource matlab package.
+I am trying to read the theory and understand the code. My current plan is to get used to their 
+Matlab code. 
 
-So, it is basically understanding the Matlab code and testing it with a sample data.
-
+I am planning to test the effectiveness of the opensource LCS code by using a sample data set.
 For the sample data, I have some LES field data, but initially I will be testing the LCS code using opensource
 data obtained from ISABEL DATABASE.. available at
 
 http://www.vets.ucar.edu/vg/isabeldata/
 
 If feasible I will try to download and upload the database in git. But it is better that you can download the
-data yourself if you want to get your hands on the LCS files.
+data yourself. If you wanted to read more about LCS you can find the files in the literature folder. 
+It will be a nice learning experience. I will let you know if I could fetch a software for sparse data too.
+Else we can use this existing open-source version to determine the LCS. We might lose some information, but it
+will be negligible (I hope). I will also work on better interpolation algorithm to account for such loss in data.
+If you want you hands dirty, you can also try modifying the code. Keep posted. Good luck.
 
 
 - Ram.
