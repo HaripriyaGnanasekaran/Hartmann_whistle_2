@@ -1,0 +1,19 @@
+
+
+Hi all, 
+
+I am planning to test the effectiveness of the opensource LCS codes taken from Daibiri webpage, 
+till we get the new version of the LCS from the Delft group.
+
+So, it is basically understanding the Matlab code and testing it with a sample data.
+
+For the sample data, I have some LES field data, but initially I will be testing the LCS code using opensource
+data obtained from ISABEL DATABASE.. available at
+
+http://www.vets.ucar.edu/vg/isabeldata/
+
+If feasible I will try to download and upload the database in git. But it is better that you can download the
+data yourself if you want to get your hands on the LCS files.
+
+
+- Ram.
