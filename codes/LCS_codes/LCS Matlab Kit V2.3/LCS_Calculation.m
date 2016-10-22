@@ -705,6 +705,10 @@ ny=str2double(get(handles.meshsize_y,'String'));
 forward_calculation=double(get(handles.forward_FTLE,'Value'));
 backward_calculation=double(get(handles.backward_FTLE,'Value'));
 
+%=================RV
+% Current code computes LCS for a range of xmin to xmax, ymin to ymax. This will be a problem for our case as we have 
+% solid walls inside fluid domain, we have to generalize this code to take account of wall interactions
+% ============== RV
 
 % f_start
 % t_length
