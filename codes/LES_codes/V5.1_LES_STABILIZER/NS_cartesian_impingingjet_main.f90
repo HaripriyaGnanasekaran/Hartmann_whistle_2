@@ -1,19 +1,7 @@
-        ! Purpose:
-        ! This is the main code to solve the problem of 3D
-        ! Round jets using full NS equations 
-
-        !_____________________________________________________________________
-        
-        ! PROGRAM WRIITEN BY SUBRAMANIAN GANESH
-
-        ! Written on 15-08-2008        Last Modified on 03-07-2015
-
-        !_____________________________________________________________________
-
-
+        !3D Navier stokes algorithm using explicit filtered LES (for turbulent jet flow)
         !Main Program
         !______________________________________________________________________
-        PROGRAM Acoustic_Scattering
+        PROGRAM Jet
 
         USE GRID_DIMENSIONS, ONLY : NXL,NXR,NYB,NYT,NZB,NZF
         USE GRID_SIZE_TIME_STEP, ONLY : dt,jet_d
@@ -24,11 +12,11 @@
         USE continuity, ONLY : rho_cur !,drho1,drho2
         USE pressure,   ONLY : p_cur !,dp1,dp2
         USE energy,     ONLY : e_cur
-        !USE vorticity,  ONLY : omega
+        
 
 
         IMPLICIT NONE
-        !INTEGER, PARAMETER :: NP = 8000
+        
         INTEGER (KIND=4) :: i,j,k,mi,meanorig,meanstart,laststep,temp
         INTEGER (KIND=4) :: development_flowthrough,no_of_flowthrough_mean,tft
         INTEGER (KIND=4) :: data_write_every,mean_write_every
@@ -37,8 +25,9 @@
         REAL (KIND=8) :: t,xr
         REAL(KIND=8), DIMENSION(NXL:NXR-1):: xr_arr
         REAL :: start_time,end_time
-        WRITE(*,*) ''
-        WRITE(*,*) ''
+        
+        WRITE(*,*)''
+        WRITE(*,*)''
         WRITE(*,*)'******************************************************************'
         WRITE(*,*)'                  LARGE EDDY SIMULATION                           '
         WRITE(*,*)'******************************************************************'
@@ -47,6 +36,7 @@
         WRITE(*,*)'SIMULATING ROUND JET (COMPRESSIBLE)'
         WRITE(*,*)'MACH NUMBER = ',v_jet/sqrt(gama*R*T_in)
         WRITE(*,*)'REYNOLS NO. = ',rho_in*v_jet*jet_d/mu
+
         i = 0
         j = 0
         k = 1
@@ -64,13 +54,14 @@
         meanstart=tft
         CALL FLOWTHROUGHMODULE(no_of_flowthrough_mean,tft)
         laststep=meanstart+tft
-        meanorig = meanstart       
+        meanorig = meanstart
+
         WRITE(*,*) 'SIMULATION BEGINS AT         =',I,' steps'
         IF(j.ne.0)THEN
         WRITE(*,*) 'MEAN DATA IS READ FROM       =',j,' steps'
         END IF
         WRITE(*,*) 'DATA COLLECTION STARTS AT    =',meanstart,' steps'
-        write(*,*) 'SIMULATION ENDS AT TIME STEP =',laststep,' steps'
+        WRITE(*,*) 'SIMULATION ENDS AT TIME STEP =',laststep,' steps'
         WRITE(*,*)'******************************************************************'
         
 
@@ -92,9 +83,9 @@
         CALL METRICS_Y
         CALL METRICS_Z
         CALL INITIALIZE_RANDOM_NUMBERS_FREUND
-        !CALL DE_INITIALIZATION
+        
 
-        write(*,*) 'Initialization Done'
+        WRITE(*,*) 'Initialization Done'
 
         temp=i
 
@@ -134,18 +125,23 @@
 	END IF
 
 	i =temp
+
         CALL CPU_TIME(start_time)
-        do
-        if(i >= laststep) exit 
+
+        DO
+        IF(i >= laststep) EXIT
+
         !SOLUTION BLOWUP CONTROLLER
         !**************************
-        if(i .gt. meanorig)then
+        
+	IF(i .GT. meanorig)THEN
         meanstart = meanorig
-        else
+        ELSE
         meanstart=0
-        end if
+        END IF
         !***************************
-        CALL TOTAL_VALUE
+        
+	CALL TOTAL_VALUE
         CALL TOTAL_SQUARE_VALUE
         CALL INFLOW_FREUND(i)
         CALL RK2(i)
@@ -160,7 +156,7 @@
         rem = MOD(i,mean_write_every)
         END IF
 
-        if (rem == 0 ) then
+        IF (rem == 0 ) THEN
 
         CALL WRITE_INFLOW_FREUND(i)
 
@@ -205,24 +201,24 @@
         CALL CALCULATE_LIGHTHILL(i)
 
         WRITE(*,*) 'STEP',i,'     COMPLETED...   FILES ARE WRITTEN'
-        end if
+        END IF
         
         OPEN(UNIT=19,FILE='run_monitor_log.dat',ACTION='WRITE',POSiTION='APPEND')
         write(19,*) 'Step',i,'u(0,0,0)',u_cur(0,0,0)
         CLOSE(19)
          
 
-	if(i > meanstart) then
+	IF(i > meanstart) THEN
         j = i - meanstart
        
-                if(i .lt. meanorig)then
+                IF(i .lt. meanorig)THEN
                 j = 4000
                 write(*,*) 'success'
-                end if
+                END IF
 
         rem = MOD(j,mean_write_every)
        
-        if (rem == 0 ) then
+        IF (rem == 0 ) THEN
         !
         CALL MEAN_VALUE(j)
         CALL MEAN_SQUARE_VALUE(j)
@@ -247,17 +243,17 @@
         WRITE(*,*) 'MEAN DATA WRITTEN FOR',J,'SAMPLES'
         !
         mi = 0
-        end if
-	end if
+        END IF
+        END IF
 
 
-        end do
+        END DO
 
 
         CALL CPU_TIME(end_time)
         PRINT *, 'TIME', end_time - start_time
         WRITE(*,*) 'LES SIMULATION - ROUNDJET: COMPLETED SUCCESSFULLY'
-	END PROGRAM Acoustic_Scattering
+        END PROGRAM Jet
 
 
 
