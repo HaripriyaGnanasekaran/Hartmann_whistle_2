@@ -1,11 +1,11 @@
 #The fortran compiler
-FORTRAN_COMPI = ifort#ifort  
+FORTRAN_COMPI = ifort#gfortran#ifort  
 
 #The compilation flags
-FORTRAN_OPT_FLAGS =   -i-dynamic -mcmodel=medium  -openmp -unroll4
+FORTRAN_OPT_FLAGS =  -mcmodel=medium  -shared-intel -qopenmp -unroll4
 
 #Target file: Dependencies files
-LES_autorun:	Basic_module.o\
+Jane_Wastsons:	Basic_module.o\
                 continuity_module.o\
 		x_momentum_module.o\
 		y_momentum_module.o\
@@ -53,7 +53,7 @@ LES_autorun:	Basic_module.o\
 
 #Command line
 	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} \
-	-o LES_autorun\
+	-o Jane_Watsons\
 		Basic_module.o\
                 continuity_module.o\
 		x_momentum_module.o\
@@ -104,7 +104,7 @@ Basic_module.o: Basic_module.f90
 	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} -c -o Basic_module.o Basic_module.f90
 
 continuity_module.o: continuity_module.f90
-	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} -c -o continuity_module.o continuity_module.f90\
+	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} -c -o continuity_module.o continuity_module.f90
 
 x_momentum_module.o: x_momentum_module.f90
 	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} -c -o x_momentum_module.o x_momentum_module.f90
@@ -234,6 +234,8 @@ NS_cartesian_RK2.o: NS_cartesian_RK2.f90
 
 bufferlayer_filter.o: bufferlayer_filter.f90
 	${FORTRAN_COMPI} ${FORTRAN_OPT_FLAGS} -c -o bufferlayer_filter.o bufferlayer_filter.f90
+
+
 
 
 #Cleaning the directory
