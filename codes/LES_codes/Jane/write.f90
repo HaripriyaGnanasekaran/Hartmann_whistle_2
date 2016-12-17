@@ -7,7 +7,33 @@
         !_____________________________________________________________________
 
 
-
+		subroutine gen_data_for_lcs(l)
+		
+		USE grid_dimensions
+        USE GRID_SIZE_TIME_STEP
+        USE continuity
+        USE x_momentum
+        USE y_momentum
+		
+		implicit none
+		integer :: i,j,k=0
+		integer, intent(in) :: l
+		real(kind=8) :: x,y
+		character(len = 50) :: fhandle
+		
+		write(fhandle,'(a8,I2.5,a4)' ) "velocity",l, ".txt"
+		open(unit = 864, file=fhandle, form='formatted')
+		
+		do i=nxl,nxr
+			call x_coord(x,i)
+			do j=nyb,nyt
+				call y_coord(y,j)
+				write(864,'(F7.2,F7.2,F7.5,F7.5)') x, y, u_cur(i,j,k), v_cur(i,j,k)
+			end do
+		end do
+		
+		
+		end subroutine gen_data_for_lcs
 
 
 

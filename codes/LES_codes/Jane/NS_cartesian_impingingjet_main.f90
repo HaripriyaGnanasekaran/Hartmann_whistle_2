@@ -100,6 +100,10 @@
         	i = i + 1
         	mi = mi + 1
 			
+			if (i>10000) then
+			call gen_data_for_lcs(i)
+			endif
+			
 	        IF(i.le.meanstart)THEN
         		rem = MOD(i,data_write_every)
         	ELSE
@@ -107,7 +111,7 @@
         	END IF
 
         	IF (rem == 0 ) THEN
-				CALL WRITEFILE(i)
+				!CALL WRITEFILE(i)
 	        END IF
         
 			OPEN(UNIT=19,FILE='run_monitor_log.dat',ACTION='WRITE',POSiTION='APPEND')
@@ -120,13 +124,13 @@
        
                 IF(i .lt. meanorig)THEN
                 	j = 4000
-                	write(*,*) 'success'
+                	!write(*,*) 'success'
                 END IF
 
         		rem = MOD(j,mean_write_every)
        
         		IF (rem == 0 ) THEN
-					CALL WRITEMEAN(j)
+					!CALL WRITEMEAN(j)
 			        mi = 0
         		END IF
         	END IF
