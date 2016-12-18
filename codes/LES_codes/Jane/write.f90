@@ -21,7 +21,7 @@
 		real(kind=8) :: x,y
 		character(len = 50) :: fhandle
 		
-		write(fhandle,'(a8,I2.5,a4)' ) "velocity",l, ".txt"
+		write(fhandle,'(a8,I5.5,a4)' ) "velocity",l, ".txt"
 		open(unit = 864, file=fhandle, form='formatted')
 		
 		do i=nxl,nxr
