@@ -1,0 +1,25 @@
+ 
+ 
+ ******************************************************************
+                   LARGE EDDY SIMULATION                           
+ ******************************************************************
+ 
+ 
+ SIMULATING ROUND JET (COMPRESSIBLE)
+ MACH NUMBER =   0.161325714640969     
+ REYNOLS NO. =    31600.0000769022     
+ **********************************************************************
+ x-distance of domain                                  =   4.51246467487857     
+ Time required per flow through                        =  0.177281894873569     
+ No of time steps required to compute one flow through =   33453.7463791131     
+ No of time steps required for FLOW TO DEVELOP         =      167270
+ No of time steps required for mean collection         =      669080
+ Duration for the mean (jet velocity*samples/distance) =   40.0003032496081     
+ (no unit)
+ **********************************************************************
+ SIMULATION BEGINS AT         =           0  steps
+ DATA COLLECTION STARTS AT    =      167270  steps
+ SIMULATION ENDS AT TIME STEP =      836350  steps
+ ******************************************************************
+ TIME   1667.520    
+ LES SIMULATION - ROUNDJET: COMPLETED SUCCESSFULLY

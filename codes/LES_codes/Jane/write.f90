@@ -28,7 +28,7 @@
 			call x_coord(x,i)
 			do j=nyb,nyt
 				call y_coord(y,j)
-				write(864,'(F7.2,F7.2,F7.5,F7.5)') x, y, u_cur(i,j,k), v_cur(i,j,k)
+				write(864,'(F10.3,F10.3,F15.5,F15.5)') x, y, u_cur(i,j,k), v_cur(i,j,k)
 			end do
 		end do
 		

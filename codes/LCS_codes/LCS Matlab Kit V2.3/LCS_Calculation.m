@@ -1462,6 +1462,9 @@ global sxcoor sycoor f_start f_end f_int
 xloc1=reshape(xmesh(:,:),[],1);
 yloc1=reshape(ymesh(:,:),[],1);
 
+
+
+
 filename=[path file];
 fid = fopen(filename,'wt');
 fprintf(fid,'TITLE = FTLE FIELD\n');
@@ -1480,10 +1483,22 @@ for iT=f_start:f_int:f_end
     Z1=reshape(Z,[],1);
     dummy=0*Z1;
     data=[xloc1 yloc1 Z1];
-
     fprintf(fid,['ZONE T=''A' num2str(iT) ''' I=' num2str(ny) ', J=' num2str(nx) ', F=POINT\n']);
     fprintf(fid,'%12.8f %12.8f %12.8f \n',data');
 end
+
+	fp = fopen('FTLE.tec','wt');
+    fprintf(fp,'TITLE = FTLE\n');
+    fprintf(fp,'VARIABLES = "X", "Y", "FTLE"\n');
+    for iter=f_start:f_int:f_end
+        fprintf(fp,['ZONE T= "A", I=' num2str(ny) ', J=' num2str(nx) ', F=POINT\n']);
+        fprintf(fp,'%12.8f %12.8f %12.8f \n',data');
+    end
+
+
+
+
+
 fclose(fid);
 
 

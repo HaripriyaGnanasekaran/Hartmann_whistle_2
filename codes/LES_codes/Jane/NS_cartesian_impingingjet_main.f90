@@ -81,7 +81,7 @@
         CALL CPU_TIME(start_time)
 
         DO
-        	IF(i >= 200) EXIT
+        	IF(i >= 151) EXIT
 
         		!SOLUTION BLOWUP CONTROLLER
         		!**************************
@@ -100,8 +100,8 @@
         	i = i + 1
         	mi = mi + 1
 			
-			if (i>100) then
-			call gen_data_for_lcs(i)
+			if (i>50) then
+			call gen_data_for_lcs(i-49)
 			endif
 			
 	        IF(i.le.meanstart)THEN
